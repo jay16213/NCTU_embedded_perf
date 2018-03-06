@@ -12,15 +12,15 @@ $(GIT_HOOKS):
 
 SRCS_common = main.c
 
-pi: $(SRCS_common) $@.c
+pi: $(SRCS_common) pi.c
 	$(CC) $(CFLAGS_common) \
-		-o $@ -DPI -DHEADER="\"$@.h\"" \
-		$(SRCS_common) $@.c
+		-o pi -DPI -DHEADER="\"pi.h\"" \
+		$(SRCS_common) pi.c
 
-matrix: $(SRCS_common) $@.c
+matrix: $(SRCS_common) matrix.c
 	$(CC) $(CFLAGS_common) \
-		-o $@ -DMATRIX -DHEADER="\"$@.h\"" \
-		$(SRCS_common) $@.c
+		-o matrix -DMATRIX -DHEADER="\"matrix.h\"" \
+		$(SRCS_common) matrix.c
 
 cache-test: $(EXEC)
 	perf stat --repeat 5 \
