@@ -30,6 +30,16 @@ cache-test: $(EXEC)
 plot: output.txt
 	gnuplot scripts/runtime.gp
 
+branch: $(SRC_common) branch.c
+	$(CC) $(CFLAGS_common) \
+		-o branch -DBRANCH -DHEADER="\"branch.h\"" \
+			$(SRCS_common) branch.c
+
+branch-test: branch
+	perf stat --repeat 5 \
+		-e branch-misses,branch-instructions,instructions,cycles \
+		./branch
+
 .PHONY: clean
 clean:
-	$(RM) $(EXEC) *.o perf.*
+	$(RM) $(EXEC) branch *.o perf.*
